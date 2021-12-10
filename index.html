@@ -11,8 +11,7 @@
 <body>
     <div id="app"></div>
     <script type="module">
-        // https://cdn.jsdelivr.net/npm/strvejs/dist/strve.esm.js
-        import { Strve, render, updateView } from './strve/index.js'; // v1.2.2
+        import { Strve, render, updateView } from 'https://cdn.jsdelivr.net/npm/strvejs/dist/strve.esm.js'; // v1.2.2
         import StrveRouter from './src/hash/index.js';
 
         const state = {
@@ -67,7 +66,7 @@
         }
 
         strveRouter.routerHashUpdate(() => {
-            console.log('change');
+            // console.log('change');
         })
 
         Strve('#app', {
