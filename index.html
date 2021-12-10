@@ -13,7 +13,7 @@
     <script type="module">
         // https://cdn.jsdelivr.net/npm/strvejs/dist/strve.esm.js
         import { Strve, render, updateView } from './strve/index.js'; // v1.2.2
-        import StrveRouter from './strve-router.js';
+        import StrveRouter from './src/hash/index.js';
 
         const state = {
             arr: ['1', '2'],
@@ -23,7 +23,7 @@
         };
 
         const strveRouter = new StrveRouter([{
-            path: '/home',
+            path: '/',
             template: Home
         }, {
             path: '/about',
@@ -63,7 +63,7 @@
 
         function goHome() {
             console.log('goHome');
-            strveRouter.routerLink('/home');
+            strveRouter.routerLink('/');
         }
 
         strveRouter.routerHashUpdate(() => {
