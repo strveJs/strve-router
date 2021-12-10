@@ -18,7 +18,7 @@ function formateObjToParamStr(paramObj) {
     }
     return sdata.join('&');
 };
-
+  
 export {
     formateObjToParamStr
 }

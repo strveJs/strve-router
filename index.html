@@ -29,7 +29,9 @@
             template: About
         }]);
 
-        strveRouter.routerHashUpdate(updateView, () => { });
+        strveRouter.routerHashUpdate(updateView, () => {
+            console.log(strveRouter.param2Obj(location.hash));
+        });
 
         function sub1() {
             return render`
