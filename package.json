@@ -1,0 +1,15 @@
+{
+  "name": "strve-router",
+  "version": "0.1.1",
+  "description": "",
+  "main": "strve-router.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitee.com/maomincoding/strve-router.git"
+  },
+  "author": "",
+  "license": "ISC"
+}

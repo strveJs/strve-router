@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StrveRouter</title>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script type="module">
+        // https://cdn.jsdelivr.net/npm/strvejs/dist/strve.esm.js
+        import { Strve, render, updateView } from './strve/index.js'; // v1.2.2
+        import StrveRouter from './strve-router.js';
+
+        const state = {
+            arr: ['1', '2'],
+            isShow: false,
+            isRed: false,
+            msg: '1'
+        };
+
+        const strveRouter = new StrveRouter([{
+            path: '/home',
+            template: Home
+        }, {
+            path: '/about',
+            template: About
+        }], updateView);
+
+        function Home() {
+            return render`
+                <div class='innter121'>
+                    <button onclick="${goAbout}" id="dd">goAbout</button>
+                    <h1>Home</h1>
+                </div>
+            `
+        }
+
+        function About() {
+            return render`
+                <div class="innter11">
+                    <button onclick="${goHome}" id="ddd">goHome</button>
+                    <h2>About</h2>
+                </div>
+            `
+        }
+
+        function App() {
+            return render`
+              <div class='inner'>
+                ${strveRouter.routerView()}
+              </div >
+          `;
+        }
+
+        function goAbout() {
+            console.log('goAbout');
+            strveRouter.routerLink('/about');
+        }
+
+        function goHome() {
+            console.log('goHome');
+            strveRouter.routerLink('/home');
+        }
+
+        strveRouter.routerHashUpdate(() => {
+            console.log('change');
+        })
+
+        Strve('#app', {
+            data: { state },
+            template: App
+        });
+    </script>
+</body>
+
+</html>
