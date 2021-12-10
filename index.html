@@ -27,13 +27,33 @@
         }, {
             path: '/about',
             template: About
-        }], updateView);
+        }]);
+
+        strveRouter.routerHashUpdate(updateView, () => { });
+
+        function sub1() {
+            return render`
+                <div>
+                    组件1
+                </div>
+            `
+        }
+
+        function sub2() {
+            return render`
+                <div>
+                    组件2
+                </div>
+            `
+        }
 
         function Home() {
             return render`
                 <div class='innter121'>
                     <button onclick="${goAbout}" id="dd">goAbout</button>
                     <h1>Home</h1>
+                    ${sub1()}
+                    ${sub2()}
                 </div>
             `
         }
@@ -64,10 +84,6 @@
             console.log('goHome');
             strveRouter.routerLink('/');
         }
-
-        strveRouter.routerHashUpdate(() => {
-            // console.log('change');
-        })
 
         Strve('#app', {
             data: { state },

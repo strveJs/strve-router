@@ -1,9 +1,7 @@
 export default class StrveRouter {
-    constructor(routes, updateView) {
+    constructor(routes) {
         this.routes = routes;
         this.path = null;
-        this.updateView = updateView;
-        this.routerHashUpdate();
     }
     routerLink(path) {
         window.location.hash = `#${path}`;
@@ -21,9 +19,9 @@ export default class StrveRouter {
         const pathurl = this.path?this.path:location.hash ? location.hash.split('#')[1] : location.pathname;
         return this.routerHash(pathurl);
     }
-    routerHashUpdate(fn){
+    routerHashUpdate(updateView,fn){
         window.addEventListener('hashchange', ()=>{
-            this.updateView(()=>{
+            updateView(()=>{
                 if(typeof fn === 'function'){
                     fn();
                 }
