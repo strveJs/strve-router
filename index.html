@@ -77,7 +77,12 @@
 
         function goAbout() {
             console.log('goAbout');
-            strveRouter.routerLink('/about');
+            strveRouter.routerLink({
+                path: '/about',
+                query: {
+                    id: 1
+                }
+            });
         }
 
         function goHome() {
