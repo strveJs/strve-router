@@ -102,7 +102,7 @@ The easiest way to try strve-router is to use the direct import CDN link. You ca
 ```
 ## Documentation
 
-To learn more about Strve, check [its documentation](https://maomincoding.github.io/strvejs-doc/).
+To learn more about Strve, check [its documentation](https://maomincoding.github.io/strvejs-doc/tool/#strve-router).
 
 ## License
 
