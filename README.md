@@ -1,5 +1,4 @@
 # Strve Router
-<a href="https://npmjs.com/package/strve-router"><img src="https://badgen.net/npm/v/strve-router" alt="npm package"></a>
 
 The official router for Strve.js.
 
