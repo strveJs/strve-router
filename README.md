@@ -27,37 +27,100 @@ The easiest way to try `Strve.js` is to use the direct import CDN link. You can 
 
 <head>
     <meta charset="UTF-8">
-    <title>Hello Strve.js</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StrveRouter</title>
 </head>
 
 <body>
     <div id="app"></div>
     <script type="module">
-        import { Strve, updateView, render } from 'https://cdn.jsdelivr.net/npm/strvejs/dist/strve.esm.js';
+        import { Strve, render, updateView } from 'https://cdn.jsdelivr.net/npm/strvejs/dist/strve.esm.js';
+        import StrveRouter from '../src/hash/index.js';
 
         const state = {
             arr: ['1', '2'],
-            msg: 'hello',
-            a: 1
+            isShow: false,
+            isRed: false,
+            msg: '1'
         };
+
+        const strveRouter = new StrveRouter([{
+            path: '/',
+            template: Home
+        }, {
+            path: '/about',
+            template: About
+        }]);
+
+        strveRouter.routerHashUpdate(updateView, () => {
+            console.log(strveRouter.param2Obj());
+        });
+
+        function sub1() {
+            return render`
+                <div>
+                    组件1
+                </div>
+            `
+        }
+
+        function sub2() {
+            return render`
+                <div>
+                    组件2
+                </div>
+            `
+        }
+
+        function Home() {
+            return render`
+                <div class='innter121'>
+                    <button onclick="${goAbout}" id="dd">goAbout</button>
+                    <h1>Home</h1>
+                    ${sub1()}
+                    ${sub2()}
+                </div>
+            `
+        }
+
+        function About() {
+            return render`
+                <div class="innter11">
+                    <button onclick="${goback}">goback</button>
+                    <button onclick="${goHome}" id="ddd">goHome</button>
+                    <h2>About</h2>
+                </div>
+            `
+        }
 
         function App() {
             return render`
               <div class='inner'>
-                  <p>{state.msg}</p>
-                  <p>${state.a + state.a}</p> 
-                  <button id='btn2' onclick=${usePush}>push</button>
-                  <ul>
-                    ${state.arr.map((todo) => render`<li key=${todo}>${todo}</li>`)}
-                  </ul>
-              </div>
+              
+                ${strveRouter.routerView()}
+              </div >
           `;
         }
 
-        function usePush() {
-            updateView(() => {
-                state.arr.push('3');
+        function goback() {
+            strveRouter.back();
+        }
+
+        function goAbout() {
+            console.log('goAbout');
+            strveRouter.routerLink({
+                path: '/about',
+                query: {
+                    id: 1,
+                    name: "maomin"
+                }
             });
+        }
+
+        function goHome() {
+            console.log('goHome');
+            strveRouter.routerLink('/');
         }
 
         Strve('#app', {
