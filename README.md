@@ -1,15 +1,5 @@
-<p align="center">
-  <a href="https://github.com/maomincoding/strve-router" target="_blank" rel="noopener noreferrer">
-    <img width="180" src="https://maomincoding.github.io/strvejs-doc/logo.png" alt="Strve logo">
-  </a>
-</p>
-<br/>
-<p align="center">
-  <a href="https://npmjs.com/package/strve-router"><img src="https://badgen.net/npm/v/strve-router" alt="npm package"></a>
-</p>
-<br/>
-
 # Strve Router
+<a href="https://npmjs.com/package/strve-router"><img src="https://badgen.net/npm/v/strve-router" alt="npm package"></a>
 
 The official router for Strve.js.
 
