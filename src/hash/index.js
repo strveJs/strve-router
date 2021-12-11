@@ -1,46 +1,42 @@
-import { formateObjToParamStr } from '../utils/index.js'
+import { formateObjToParamStr,getCurrentPath,getBaseUrl,routerHash } from '../utils/index.js'
 export default class StrveRouter {
     constructor(routes) {
         this.routes = routes;
         this.path = '';
     }
+
     routerLink(pathData) {
         if (pathData) {
             if (typeof pathData === 'string') {
-                window.location.hash = `#${pathData}`;
+                window.location.href = `${getBaseUrl()}#${pathData}`;
                 this.path = pathData;
             } else {
-                if(pathData.query){
-                    window.location.hash = `#${pathData.path}?${formateObjToParamStr(pathData.query)}`;
+                if (pathData.query) {
+                    window.location.href = `${getBaseUrl()}#${pathData.path}?${formateObjToParamStr(pathData.query)}`;
                 } else {
-                    window.location.hash = `#${pathData.path}`;
+                    window.location.href = `${getBaseUrl()}#${pathData.path}`;
                 }
                 this.path = pathData.path;
             }
         }
     }
-    routerHash(path) {
-        for (let index = 0; index < this.routes.length; index++) {
-            const item = this.routes[index];
-            if (item.path === path) {
-                return item.template();
-            }
-        }
-    }
+
     routerView() {
         if (this.path) {
-            return this.routerHash(this.path);
+            return routerHash(this.path,this.routes);
         } else {
             if (location.hash) {
-                const path = location.hash.indexOf('?') !== -1 ? location.hash.split('#')[1].split('?')[0] : location.hash.split('#')[1];
-                return this.routerHash(path);
+                const path = getCurrentPath();
+                return routerHash(path,this.routes);
             } else {
-                return this.routerHash(location.pathname);
+                return routerHash(location.pathname,this.routes);
             }
         }
     }
+
     routerHashUpdate(updateView, fn) {
         window.addEventListener('hashchange', () => {
+            this.path = getCurrentPath();
             updateView(() => {
                 if (typeof fn === 'function') {
                     fn();
@@ -48,21 +44,34 @@ export default class StrveRouter {
             }, 'useRouter')
         }, false);
     }
-    param2Obj(url) {
-        const search = decodeURIComponent(url.split('?')[1]).replace(/\+/g, ' ')
+
+    go(n) {
+        window.history.go(n);
+    }
+
+    back() {
+        window.history.go(-1);
+    }
+
+    forward() {
+        window.history.go(1);
+    }
+
+    param2Obj() {
+        const search = decodeURIComponent(location.href.split('?')[1]).replace(/\+/g, ' ')
         if (!search) {
-          return {}
+            return {}
         }
         const obj = {}
         const searchArr = search.split('&')
         searchArr.forEach(v => {
-          const index = v.indexOf('=')
-          if (index !== -1) {
-            const name = v.substring(0, index)
-            const val = v.substring(index + 1, v.length)
-            obj[name] = val
-          }
+            const index = v.indexOf('=')
+            if (index !== -1) {
+                const name = v.substring(0, index)
+                const val = v.substring(index + 1, v.length)
+                obj[name] = val
+            }
         })
         return obj
-      }
+    }
 }

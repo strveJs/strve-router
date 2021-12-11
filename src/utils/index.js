@@ -17,8 +17,31 @@ function formateObjToParamStr(paramObj) {
         sdata.push(`${attr}=${filter(paramObj[attr])}`);
     }
     return sdata.join('&');
-};
-  
+}
+
+function getCurrentPath() {
+    return location.hash.indexOf('?') !== -1 ? location.hash.split('#')[1].split('?')[0] : location.hash.split('#')[1];
+}
+
+function getBaseUrl() {
+    const href = window.location.href;
+    const i = href.indexOf('#');
+    const base = i >= 0 ? href.slice(0, i) : href;
+    return `${base}`;
+}
+
+function routerHash(path,routes) {
+    for (let index = 0; index < routes.length; index++) {
+        const item = routes[index];
+        if (item.path === path) {
+            return item.template();
+        }
+    }
+}
+
 export {
-    formateObjToParamStr
+    formateObjToParamStr,
+    getCurrentPath,
+    getBaseUrl,
+    routerHash
 }
