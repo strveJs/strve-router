@@ -3,8 +3,6 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>StrveRouter</title>
 </head>
 
@@ -15,10 +13,7 @@
         import StrveRouter from '../src/hash/index.js';
 
         const state = {
-            arr: ['1', '2'],
-            isShow: false,
-            isRed: false,
-            msg: '1'
+            msg: 'Hello!'
         };
 
         const strveRouter = new StrveRouter([{
@@ -33,38 +28,20 @@
             console.log(strveRouter.param2Obj());
         });
 
-        function sub1() {
-            return render`
-                <div>
-                    组件1
-                </div>
-            `
-        }
-
-        function sub2() {
-            return render`
-                <div>
-                    组件2
-                </div>
-            `
-        }
-
         function Home() {
             return render`
-                <div class='innter121'>
-                    <button onclick="${goAbout}" id="dd">goAbout</button>
+                <div class='innter'>
+                    <button onclick="${goAbout}">goAbout</button>
                     <h1>Home</h1>
-                    ${sub1()}
-                    ${sub2()}
                 </div>
             `
         }
 
         function About() {
             return render`
-                <div class="innter11">
+                <div class="innter">
                     <button onclick="${goback}">goback</button>
-                    <button onclick="${goHome}" id="ddd">goHome</button>
+                    <button onclick="${goHome}">goHome</button>
                     <h2>About</h2>
                 </div>
             `
@@ -73,14 +50,16 @@
         function App() {
             return render`
               <div class='inner'>
-              
+                <p>{state.msg}</p>
                 ${strveRouter.routerView()}
               </div >
           `;
         }
+
         function goback() {
             strveRouter.back();
         }
+
         function goAbout() {
             console.log('goAbout');
             strveRouter.routerLink({
