@@ -1,4 +1,7 @@
-import { formateObjToParamStr,getCurrentPath,getBaseUrl,routerHash } from '../utils/index.js'
+import { formateObjToParamStr, getCurrentPath, getBaseUrl, routerHash } from '../utils/index.js'
+
+let viewData = null;
+
 export default class StrveRouter {
     constructor(routes) {
         this.routes = routes;
@@ -21,17 +24,27 @@ export default class StrveRouter {
         }
     }
 
+    nextUpdateView(view) {
+        if (viewData) { viewData = null; }
+        viewData = view;
+    }
+
     routerView() {
+        if(viewData){
+            return viewData;
+        }
+        
         if (this.path) {
-            return routerHash(this.path,this.routes);
+            return routerHash(this.path, this.routes);
         } else {
             if (location.hash) {
                 const path = getCurrentPath();
-                return routerHash(path,this.routes);
+                return routerHash(path, this.routes);
             } else {
-                return routerHash(location.pathname,this.routes);
+                return routerHash(location.pathname, this.routes);
             }
         }
+
     }
 
     routerHashUpdate(updateView, fn) {
@@ -62,14 +75,14 @@ export default class StrveRouter {
         if (!search) {
             return {}
         }
-        const obj = {}
-        const searchArr = search.split('&')
+        const obj = {};
+        const searchArr = search.split('&');
         searchArr.forEach(v => {
-            const index = v.indexOf('=')
+            const index = v.indexOf('=');
             if (index !== -1) {
-                const name = v.substring(0, index)
-                const val = v.substring(index + 1, v.length)
-                obj[name] = val
+                const name = v.substring(0, index);
+                const val = v.substring(index + 1, v.length);
+                obj[name] = val;
             }
         })
         return obj
