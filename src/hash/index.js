@@ -1,7 +1,4 @@
 import { formateObjToParamStr, getCurrentPath, getBaseUrl, routerHash } from '../utils/index.js'
-
-let viewData = null;
-
 export default class StrveRouter {
     constructor(routes) {
         this.routes = routes;
@@ -24,16 +21,7 @@ export default class StrveRouter {
         }
     }
 
-    nextUpdateView(view) {
-        if (viewData) { viewData = null; }
-        viewData = view;
-    }
-
     routerView() {
-        if(viewData){
-            return viewData;
-        }
-        
         if (this.path) {
             return routerHash(this.path, this.routes);
         } else {

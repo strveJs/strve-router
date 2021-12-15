@@ -1,6 +1,6 @@
 {
   "name": "strve-router",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "description": "The official router for Strve.js",
   "main": "dist/strve-router.esm.js",
   "module": "dist/strve-router.esm.js",
