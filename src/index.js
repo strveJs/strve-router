@@ -1,6 +1,6 @@
 /*!
- * strve-router v2.0.0
- * (c) 2021-2022 Vam
+ * strve-router v2.0.1
+ * (c) 2021-2022 maomincoding
  * Released under the MIT License.
  */
 
