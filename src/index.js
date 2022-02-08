@@ -1,10 +1,10 @@
 /*!
- * strve-router v2.0.1
+ * strve-router v2.0.2
  * (c) 2021-2022 maomincoding
  * Released under the MIT License.
  */
 
-const strveRouterVersion = '2.0.0'; 
+const strveRouterVersion = '2.0.2'; 
 let path = '';
 
 function StrveRouter(routes){
