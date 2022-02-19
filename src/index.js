@@ -1,22 +1,22 @@
 /*!
- * strve-router v2.0.2
+ * strve-router v2.0.3
  * (c) 2021-2022 maomincoding
  * Released under the MIT License.
  */
 
-const strveRouterVersion = '2.0.2'; 
+const strveRouterVersion = '2.0.3'; 
 let path = '';
 
 function StrveRouter(routes){
     function routerView () {
         if (path) {
-            return routerHash(path, routes);
+            return routerHash(path, routes)
         } else {
             if (location.hash) {
                 const currentPath = getCurrentPath();
-                return routerHash(currentPath, routes);
+                return routerHash(currentPath, routes)
             } else {
-                return routerHash(location.pathname, routes);
+                return routerHash(location.pathname, routes)
             }
         }
     
@@ -105,7 +105,7 @@ function formateObjToParamStr(paramObj) {
 }
 
 function getCurrentPath() {
-    return location.hash.indexOf('?') !== -1 ? location.hash.split('#')[1].split('?')[0] : location.hash.split('#')[1];
+    return location.hash.indexOf('?') !== -1 ? location.hash.split('#')[1].split('?')[0] : location.hash.split('#')[1]
 }
 
 function getBaseUrl() {
