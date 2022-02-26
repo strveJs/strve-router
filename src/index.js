@@ -1,14 +1,14 @@
 /*!
- * strve-router v2.0.3
+ * strve-router v2.0.4
  * (c) 2021-2022 maomincoding
  * Released under the MIT License.
  */
 
-const strveRouterVersion = '2.0.3'; 
+const strveRouterVersion = '2.0.3';
 let path = '';
 
-function StrveRouter(routes){
-    function routerView () {
+function StrveRouter(routes) {
+    function routerView() {
         if (path) {
             return routerHash(path, routes)
         } else {
@@ -16,18 +16,25 @@ function StrveRouter(routes){
                 const currentPath = getCurrentPath();
                 return routerHash(currentPath, routes)
             } else {
+                if(location.pathname === '/index.html'){
+                    return routerHash('/', routes)
+                }
                 return routerHash(location.pathname, routes)
             }
         }
-    
+
     }
     return {
         routerView
     }
 }
 
-function routerLink(pathData) {
+function routerLink(pathData, fn) {
     if (pathData) {
+        if (fn && typeof fn === 'function') {
+            fn();
+        }
+
         if (typeof pathData === 'string') {
             window.location.href = `${getBaseUrl()}#${pathData}`;
             path = pathData;
@@ -115,7 +122,7 @@ function getBaseUrl() {
     return `${base}`
 }
 
-function routerHash(path,routes) {
+function routerHash(path, routes) {
     for (let index = 0; index < routes.length; index++) {
         const item = routes[index];
         if (item.path === path) {
