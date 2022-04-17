@@ -1,0 +1,21 @@
+{
+	"compilerOptions": {
+		"target": "esnext",
+		"module": "esnext",
+		"allowJs": true,
+		"outDir": "lib",
+		"lib": ["esnext", "dom"],
+		"declaration": true,
+		"declarationDir": "types",
+		"rootDir": ".",
+		"importHelpers": true,
+		"moduleResolution": "Node",
+		"strict": true,
+		"strictNullChecks": false,
+		"baseUrl": ".",
+		"esModuleInterop": true,
+		"skipLibCheck": true,
+		"forceConsistentCasingInFileNames": true
+	},
+	"exclude": ["node_modules"]
+}

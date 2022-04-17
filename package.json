@@ -1,13 +1,15 @@
 {
   "name": "strve-router",
-  "version": "2.0.4",
+  "version": "2.1.0",
   "description": "The official router for Strve.js",
   "main": "dist/strve-router.esm.js",
   "module": "dist/strve-router.esm.js",
   "unpkg": "dist/strve-router.esm.js",
   "jsdelivr": "dist/strve-router.esm.js",
+  "typings": "types/index.d.ts",
   "files": [
-    "dist/*.js"
+    "dist/*.js",
+    "types/index.d.ts"
   ],
   "scripts": {
     "build": "rollup -c"
