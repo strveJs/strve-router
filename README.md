@@ -7,9 +7,10 @@ The official router for Strve.js.
 Strve Router is the official route manager of Strve.js. It is deeply integrated with the core of Strve.js, making it easy to build single-page applications.
 
 Currently only supports Hash mode.
+
 ## Documentation
 
-To learn more about Strve, check [its documentation](https://maomincoding.github.io/strvejs-doc/tool/#strve-router).
+To learn more about Strve, check [its documentation](https://maomincoding.github.io/strve-doc/tool/#strve-router).
 
 ## License
 
