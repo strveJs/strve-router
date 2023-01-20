@@ -1,8 +1,3 @@
-/*!
- * strve-router v2.1.0
- * (c) 2021-2022 maomincoding
- * Released under the MIT License.
- */
 declare const routerVersion: string;
 declare function initRouter(routes: any[], setData: Function, fn: Function): {
     view: () => any;

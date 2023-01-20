@@ -1,10 +1,4 @@
-/*!
- * strve-router v2.1.0
- * (c) 2021-2022 maomincoding
- * Released under the MIT License.
- */
-
-const routerVersion: string = '2.1.0';
+const routerVersion: string = '__VERSION__';
 
 interface globalType {
 	path: string;
