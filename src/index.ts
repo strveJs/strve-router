@@ -27,7 +27,6 @@ function initRouter(routes: any[], setData: Function, fn: Function) {
           },
           {
             status: "useRouter",
-            routerView: view,
           }
         );
       },
