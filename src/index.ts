@@ -76,32 +76,38 @@ function routerHash(path: string, routes: any[]) {
     }
   }
 }
-
+function isOrdinaryObject(obj: object){
+  return Object.prototype.toString.call(obj).split(' ')[1].includes('Object')
+}
 interface pathDataType {
   path: string;
   query: object;
 }
 
 function linkTo(pathData: string | pathDataType, fn: Function) {
-  if (pathData) {
+  if (typeof pathData === "string" || isOrdinaryObject(pathData)) {
     if (fn && typeof fn === "function") {
-      fn();
+        fn();
     }
-
     if (typeof pathData === "string") {
-      window.location.href = `${getBaseUrl()}#${pathData}`;
-      global.path = pathData;
-    } else {
-      if (pathData.query) {
-        window.location.href = `${getBaseUrl()}#${
-          pathData.path
-        }?${formateObjToParamStr(pathData.query)}`;
-      } else {
-        window.location.href = `${getBaseUrl()}#${pathData.path}`;
-      }
-      global.path = pathData.path;
+        window.location.href = `${getBaseUrl()}#${pathData}`;
+        global.path = pathData;
+    }
+    else {
+        if(pathData.path && typeof pathData.path === "string"){
+            if (pathData.query) {
+                window.location.href = `${getBaseUrl()}#${pathData.path}?${formateObjToParamStr(pathData.query)}`;
+            }
+            else {
+                window.location.href = `${getBaseUrl()}#${pathData.path}`;
+            }
+            global.path = pathData.path;
+        }else {
+            console.error('[strve-router error]: the first parameter of function linkTo should have a param called path with string when it is an ordinary object')
+        }
     }
   }
+  console.error('[strve-router error]: the first parameter of function linkTo should be a string or a object')
 }
 
 function go(n: number) {
