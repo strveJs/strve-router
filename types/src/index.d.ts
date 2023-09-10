@@ -2,7 +2,6 @@ declare const routerVersion: string;
 declare function initRouter(routes: any[], setData: Function, fn: Function): {
     view: () => any;
 };
-declare function isOrdinaryObject(obj: object): void;
 interface pathDataType {
     path: string;
     query: object;
@@ -15,4 +14,4 @@ interface objparse {
     [key: string]: string;
 }
 declare function toParse(): objparse;
-export { initRouter, isOrdinaryObject, linkTo, go, back, forward, toParse, routerVersion };
+export { initRouter, linkTo, go, back, forward, toParse, routerVersion };
