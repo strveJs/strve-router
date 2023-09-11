@@ -6,7 +6,7 @@ interface pathDataType {
     path: string;
     query: object;
 }
-declare function linkTo(pathData: string | pathDataType, fn: Function): void;
+declare function linkTo(pathData: string | pathDataType): void;
 declare function go(n: number): void;
 declare function back(): void;
 declare function forward(): void;

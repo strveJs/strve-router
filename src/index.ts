@@ -76,38 +76,43 @@ function routerHash(path: string, routes: any[]) {
     }
   }
 }
-function isOrdinaryObject(obj: object){
-  return Object.prototype.toString.call(obj).split(' ')[1].includes('Object')
+function isOrdinaryObject(obj: object) {
+  return Object.prototype.toString
+    .call(obj)
+    .match(/\[object (.+?)\]/)[1]
+    .toLowerCase();
 }
 interface pathDataType {
   path: string;
   query: object;
 }
 
-function linkTo(pathData: string | pathDataType, fn: Function) {
-  if (typeof pathData === "string" || isOrdinaryObject(pathData)) {
-    if (fn && typeof fn === "function") {
-        fn();
-    }
+function linkTo(pathData: string | pathDataType) {
+  if (typeof pathData === "string" || isOrdinaryObject(pathData) === "object") {
     if (typeof pathData === "string") {
-        window.location.href = `${getBaseUrl()}#${pathData}`;
-        global.path = pathData;
-    }
-    else {
-        if(pathData.path && typeof pathData.path === "string"){
-            if (pathData.query) {
-                window.location.href = `${getBaseUrl()}#${pathData.path}?${formateObjToParamStr(pathData.query)}`;
-            }
-            else {
-                window.location.href = `${getBaseUrl()}#${pathData.path}`;
-            }
-            global.path = pathData.path;
-        }else {
-            console.error('[strve-router error]: the first parameter of function linkTo should have a param called path with string when it is an ordinary object')
+      window.location.href = `${getBaseUrl()}#${pathData}`;
+      global.path = pathData;
+    } else {
+      if (pathData.path && typeof pathData.path === "string") {
+        if (pathData.query) {
+          window.location.href = `${getBaseUrl()}#${
+            pathData.path
+          }?${formateObjToParamStr(pathData.query)}`;
+        } else {
+          window.location.href = `${getBaseUrl()}#${pathData.path}`;
         }
+        global.path = pathData.path;
+      } else {
+        console.error(
+          "[strve-router error]: the first parameter of function linkTo should have a param called path with string when it is an ordinary object"
+        );
+      }
     }
+  } else {
+    console.error(
+      "[strve-router error]: the first parameter of function linkTo should be a string or a object"
+    );
   }
-  console.error('[strve-router error]: the first parameter of function linkTo should be a string or a object')
 }
 
 function go(n: number) {
