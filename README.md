@@ -10,7 +10,7 @@ Currently only supports Hash mode.
 
 ## Documentation
 
-To learn more about Strve Router, check [its documentation](https://maomincoding.github.io/strve-doc/tool/strveRouter/).
+To learn more about Strve Router, check [its documentation](https://strvejs.github.io/strve-doc/tool/strveRouter/).
 
 ## License
 
