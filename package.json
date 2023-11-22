@@ -1,6 +1,6 @@
 {
   "name": "strve-router",
-  "version": "4.0.1",
+  "version": "4.1.0",
   "description": "The official router for Strve.js",
   "main": "dist/strve-router.esm.js",
   "module": "dist/strve-router.esm.js",
@@ -40,8 +40,8 @@
   "homepage": "https://github.com/strveJs/strve-router#readme",
   "devDependencies": {
     "@rollup/plugin-replace": "^5.0.2",
+    "@rollup/plugin-terser": "^0.4.4",
     "rollup": "^2.57.0",
-    "rollup-plugin-terser": "^7.0.2",
     "typescript": "4.6.3"
   }
 }

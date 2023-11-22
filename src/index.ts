@@ -1,4 +1,4 @@
-const routerVersion: string = "__VERSION__";
+const routerVersion: string = '__VERSION__';
 
 interface globalType {
   path: string;
@@ -7,7 +7,7 @@ interface globalType {
 }
 
 const global: globalType = {
-  path: "",
+  path: '',
   isMounted: false,
   _template: null,
 };
@@ -15,20 +15,15 @@ const global: globalType = {
 function initRouter(routes: any[], setData: Function, fn: Function) {
   if (setData) {
     window.addEventListener(
-      "hashchange",
+      'hashchange',
       () => {
         global.path = getCurrentPath();
         global.isMounted = false;
-        setData(
-          () => {
-            if (typeof fn === "function") {
-              fn();
-            }
-          },
-          {
-            status: "useRouter",
+        setData(() => {
+          if (typeof fn === 'function') {
+            fn();
           }
-        );
+        }, 'useRouter');
       },
       false
     );
@@ -46,8 +41,8 @@ function initRouter(routes: any[], setData: Function, fn: Function) {
           return routerHash(currentPath, routes);
         }
       } else {
-        if (location.pathname === "/index.html") {
-          return routerHash("/", routes);
+        if (location.pathname === '/index.html') {
+          return routerHash('/', routes);
         }
 
         return routerHash(location.pathname, routes);
@@ -88,29 +83,29 @@ interface pathDataType {
 }
 
 function linkTo(pathData: string | pathDataType) {
-  if (typeof pathData === "string" || isOrdinaryObject(pathData) === "object") {
-    if (typeof pathData === "string") {
+  if (typeof pathData === 'string' || isOrdinaryObject(pathData) === 'object') {
+    if (typeof pathData === 'string') {
       window.location.href = `${getBaseUrl()}#${pathData}`;
       global.path = pathData;
     } else {
-      if (pathData.path && typeof pathData.path === "string") {
+      if (pathData.path && typeof pathData.path === 'string') {
         if (pathData.query) {
-          window.location.href = `${getBaseUrl()}#${
-            pathData.path
-          }?${formateObjToParamStr(pathData.query)}`;
+          window.location.href = `${getBaseUrl()}#${pathData.path}?${formateObjToParamStr(
+            pathData.query
+          )}`;
         } else {
           window.location.href = `${getBaseUrl()}#${pathData.path}`;
         }
         global.path = pathData.path;
       } else {
         console.error(
-          "[strve-router error]: the first parameter of function linkTo should have a param called path with string when it is an ordinary object"
+          '[strve-router error]: the first parameter of function linkTo should have a param called path with string when it is an ordinary object'
         );
       }
     }
   } else {
     console.error(
-      "[strve-router error]: the first parameter of function linkTo should be a string or a object"
+      '[strve-router error]: the first parameter of function linkTo should be a string or a object'
     );
   }
 }
@@ -132,17 +127,14 @@ interface objparse {
 }
 
 function toParse() {
-  const search = decodeURIComponent(location.href.split("?")[1]).replace(
-    /\+/g,
-    " "
-  );
+  const search = decodeURIComponent(location.href.split('?')[1]).replace(/\+/g, ' ');
   if (!search) {
     return {};
   }
   const obj: objparse = {};
-  const searchArr = search.split("&");
+  const searchArr = search.split('&');
   searchArr.forEach((v) => {
-    const index = v.indexOf("=");
+    const index = v.indexOf('=');
     if (index !== -1) {
       const name = v.substring(0, index);
       const val = v.substring(index + 1, v.length);
@@ -153,15 +145,15 @@ function toParse() {
 }
 
 function strFilter(str: string) {
-  str += "";
-  str = str.replace(/%/g, "%25");
-  str = str.replace(/\+/g, "%2B");
-  str = str.replace(/ /g, "%20");
-  str = str.replace(/\//g, "%2F");
-  str = str.replace(/\?/g, "%3F");
-  str = str.replace(/&/g, "%26");
-  str = str.replace(/\=/g, "%3D");
-  str = str.replace(/#/g, "%23");
+  str += '';
+  str = str.replace(/%/g, '%25');
+  str = str.replace(/\+/g, '%2B');
+  str = str.replace(/ /g, '%20');
+  str = str.replace(/\//g, '%2F');
+  str = str.replace(/\?/g, '%3F');
+  str = str.replace(/&/g, '%26');
+  str = str.replace(/\=/g, '%3D');
+  str = str.replace(/#/g, '%23');
   return str;
 }
 
@@ -170,18 +162,18 @@ function formateObjToParamStr(paramObj: any) {
   for (let attr in paramObj) {
     sdata.push(`${attr}=${strFilter(paramObj[attr])}`);
   }
-  return sdata.join("&");
+  return sdata.join('&');
 }
 
 function getCurrentPath() {
-  return location.hash.indexOf("?") !== -1
-    ? location.hash.split("#")[1].split("?")[0]
-    : location.hash.split("#")[1];
+  return location.hash.indexOf('?') !== -1
+    ? location.hash.split('#')[1].split('?')[0]
+    : location.hash.split('#')[1];
 }
 
 function getBaseUrl() {
   const href = window.location.href;
-  const i = href.indexOf("#");
+  const i = href.indexOf('#');
   const base = i >= 0 ? href.slice(0, i) : href;
   return `${base}`;
 }
