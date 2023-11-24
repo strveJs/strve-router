@@ -58,25 +58,24 @@ function initRouter(routes: any[], setData: Function, fn: Function) {
 function routerHash(path: string, routes: any[]) {
   for (let index = 0; index < routes.length; index++) {
     const item = routes[index];
-
     if (item.path === path) {
       if (global.isMounted) {
         return global._template();
       }
-
       global.isMounted = true;
-      const __template = new item.template[0]();
-      global._template = __template[item.template[1]];
+      global._template = item.template();
       return global._template();
     }
   }
 }
+
 function isOrdinaryObject(obj: object) {
   return Object.prototype.toString
     .call(obj)
     .match(/\[object (.+?)\]/)[1]
     .toLowerCase();
 }
+
 interface pathDataType {
   path: string;
   query: object;
