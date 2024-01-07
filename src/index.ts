@@ -59,7 +59,7 @@ function routerHash(path: string, routes: any[]) {
         return global._template();
       }
       global.isMounted = true;
-      global._template = item.template();
+      global._template = item.template;
       return global._template();
     }
   }
