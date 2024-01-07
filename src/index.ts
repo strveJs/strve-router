@@ -19,7 +19,8 @@ function initRouter(routes: any[], resetView: Function) {
       () => {
         global.path = getCurrentPath();
         global.isMounted = false;
-        resetView();
+        const newTree = routerHash(global.path, routes);
+        resetView(newTree);
       },
       false
     );
@@ -58,8 +59,11 @@ function routerHash(path: string, routes: any[]) {
       if (global.isMounted) {
         return global._template();
       }
+
+      const newTemplate = item.template;
       global.isMounted = true;
-      global._template = item.template;
+      global._template = newTemplate;
+
       return global._template();
     }
   }
