@@ -12,18 +12,14 @@ const global: globalType = {
   _template: null,
 };
 
-function initRouter(routes: any[], setData: Function, fn: Function) {
-  if (setData) {
+function initRouter(routes: any[], resetView: Function) {
+  if (typeof resetView === 'function') {
     window.addEventListener(
       'hashchange',
       () => {
         global.path = getCurrentPath();
         global.isMounted = false;
-        setData(() => {
-          if (typeof fn === 'function') {
-            fn();
-          }
-        }, 'useRouter');
+        resetView();
       },
       false
     );

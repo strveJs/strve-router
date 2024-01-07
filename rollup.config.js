@@ -21,6 +21,7 @@ const config = {
 
 const vars = {
   __VERSION__: version,
+  preventAssignment: true
 };
 config['plugins'].push(replace(vars));
 

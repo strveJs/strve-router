@@ -1,5 +1,5 @@
 declare const routerVersion: string;
-declare function initRouter(routes: any[], setData: Function, fn: Function): {
+declare function initRouter(routes: any[], resetView: Function): {
     view: () => any;
 };
 interface pathDataType {
